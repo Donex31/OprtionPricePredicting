@@ -1,0 +1,66 @@
+﻿@model MonteCarloModel
+@{
+    ViewData["Title"] = "Monte Carlo Predictin Option Price";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Insert values and click calculate to predict price for option</p>
+
+<form>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.S0)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.S0)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.K)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.K)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.sigma)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.sigma)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.r)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.r)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.T)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.T)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.timestamp)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.timestamp)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.samples)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.samples)
+    </div>
+
+    <button asp-action="CalcMonteCarlo">Calculate</button>
+</form>
+
+
+
+<div>
+    @TempData["Value"]
+</div>
