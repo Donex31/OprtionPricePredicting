@@ -41,46 +41,76 @@ namespace OptionPredicting.Controllers
 
         public async Task<IActionResult> CalcBlackSholesAsync(BlackSholesModel model)
         {
+            try
+            {
+                double S0 = model.S0;
+                double K = model.K;
+                double T = model.T;
+                double sigma = model.sigma / 100;
+                double r = model.r / 100;
 
-            double S0 = model.S0;
-            double K = model.K;
-            double T = model.T;
-            double sigma = model.sigma;
-            double r = model.r;
+                string json = $"{{\"S0\": {S0},\"K\": {K},\"T\": {T},\"sigma\": {sigma},\"r\": {r}}}";
 
-            string json = $"{{\"S0\": {S0},\"K\": {K},\"T\": {T},\"sigma\": {sigma},\"r\": {r}}}";
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:8888/api/v1/blacksholes", content);
 
-            var response = await client.PostAsync("http://localhost:8888/api/v1/blacksholes", content);
+                var responseString = await response.Content.ReadAsStringAsync();
 
-            var responseString = await response.Content.ReadAsStringAsync();
+                var result = double.TryParse(responseString, out _);
 
-            TempData["value"] = "Predicted Price is: " + responseString;
-            return RedirectToAction("BlackSholes");
+                if (!result)
+                {
+                    responseString = "ERROR";
+                }
+
+                TempData["value"] = "Predicted Price is: " + responseString;
+                return RedirectToAction("BlackSholes");
+            }
+            catch
+            {
+                TempData["value"] = "The error was occure";
+                return RedirectToAction("BlackSholes");
+            }
+
         }
 
         public async Task<IActionResult> CalcMonteCarloAsync(MonteCarloModel model)
         {
+            try
+            {
+                double S0 = model.S0;
+                double K = model.K;
+                double T = model.T;
+                double sigma = model.sigma / 100;
+                double r = model.r / 100;
+                double timestamp = model.timestamp;
+                double samples = model.samples;
 
-            double S0 = model.S0;
-            double K = model.K;
-            double T = model.T;
-            double sigma = model.sigma;
-            double r = model.r;
-            double timestamp = model.timestamp;
-            double samples = model.samples;
+                string json = $"{{\"S0\": {S0},\"K\": {K},\"T\": {T},\"sigma\": {sigma},\"r\": {r},\"timestamp\": {timestamp},\"samples\": {samples}}}";
 
-            string json = $"{{\"S0\": {S0},\"K\": {K},\"T\": {T},\"sigma\": {sigma},\"r\": {r},\"timestamp\": {timestamp},\"samples\": {samples}}}";
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:8888/api/v1/montecarlo", content);
 
-            var response = await client.PostAsync("http://localhost:8888/api/v1/montecarlo", content);
+                var responseString = await response.Content.ReadAsStringAsync();
 
-            var responseString = await response.Content.ReadAsStringAsync();
+                var result = double.TryParse(responseString, out _);
 
-            TempData["value"] = "Predicted Price is: " + responseString;
-            return RedirectToAction("MonteCarlo");
+                if (!result)
+                {
+                    responseString = "ERROR";
+                }
+
+                TempData["value"] = "Predicted Price is: " + responseString;
+                return RedirectToAction("MonteCarlo");
+            }
+            catch
+            {
+                TempData["value"] = "The error was occure";
+                return RedirectToAction("MonteCarlo");
+            }
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

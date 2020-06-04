@@ -2,11 +2,31 @@
     ViewData["Title"] = "Options Price Predictor";
 }
 
-<div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mauris justo, facilisis vel quam vel, luctus lobortis ex. Donec efficitur finibus maximus. Nullam lacus sapien, pharetra finibus venenatis a, fermentum eu sapien. Aliquam ac velit et sapien cursus tincidunt at sit amet ipsum. Curabitur consequat sit amet nibh ut pulvinar. Etiam a neque non nisi tempor posuere. Pellentesque consectetur sem suscipit lorem sollicitudin, sed mattis enim volutpat. Donec id dapibus tellus. Suspendisse ultricies commodo turpis quis malesuada. Morbi molestie semper porta. Integer at metus laoreet, vestibulum orci non, luctus orci. In rhoncus a odio nec mattis. Vivamus in lacinia erat, quis dictum erat. Proin rutrum egestas dignissim. Ut mattis turpis nec sem mattis, quis efficitur quam commodo.
-
-        Nullam tincidunt ornare tellus, at efficitur justo eleifend non. Etiam nec venenatis nisi. Nunc ornare vehicula mattis. Ut vestibulum libero vel libero eleifend, ut porta nunc sagittis. Etiam commodo condimentum semper. Maecenas sit amet ultricies turpis. Duis facilisis sem vitae ante feugiat dignissim. Vestibulum ultrices molestie metus.</a>.
-    </p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <p>
+            <h2> Black - Sholes Model</h2>
+        <p style="text-align: left">
+            The model assumes the price of heavily traded assets follows a geometric Brownian motion with constant drift and volatility. When applied to a stock option, the model incorporates the constant price variation of the stock, the time value of money, the option's strike price, and the time to the option's expiry.
+            Also called Black-Scholes-Merton, it was the first widely used model for option pricing. It's used to calculate the theoretical value of options using current stock prices, expected dividends, the option's strike price, expected interest rates, time to expiration and expected volatility.
+        </p>
+        <p style="text-align: left">
+            The Black-Scholes model makes certain assumptions:<a>
+                <ul style="text-align: left">
+                    <li>The option is European and can only be exercised at expiration.</li>
+                    <li>The option is European and can only be exercised at expiration.</li>
+                    <li>No dividends are paid out during the life of the option.</li>
+                    <li>Markets are efficient (i.e., market movements cannot be predicted).</li>
+                    <li>There are no transaction costs in buying the option.</li>
+                    <li>The risk-free rate and volatility of the underlying are known and constant.
+                    <li>The returns on the underlying are normally distributed.</li>
+                </ul>
+                <h2> Monte Carlo model</h2>
+        <p style="text-align: left">
+            Monte-Carlo methods are ideal for pricing options where the payoff is path dependent (e.g. lookback options, asian options and spread options) or options where the payoff is dependent on a basket of underlying assets (rather than just a single asset).
+        </p>
+        <p>
+            Monte-Carlo methods differentiate themselves from other option pricing techniques in the way that potential future asset prices are generated. The following Simulating Asset Paths section describes how these paths may be generated for a standard log-normal model of equity asset prices. However, the technique may be applied to any asset that follows any stochastic 
+            process (where an associated random distibution exists from which samples may be obtained).
+        </p>
+    </div>

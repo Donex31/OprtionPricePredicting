@@ -2,51 +2,60 @@
 @{
     ViewData["Title"] = "Black-Soles Predictin Option Price";
 }
-<h1>@ViewData["Title"]</h1>
-
-<p>Insert values and click calculate to predict price for option</p>
+<style>
+    input{
+        margin: 5px
+    }
+    label{
+        margin-top: 10px
+    }
+    output{
+        margin-top: 20px
+    }
+</style>
 
 <form>
-    <div class="editor-label">
-        @Html.LabelFor(model => model.S0)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.S0)
+    <h1>@ViewData["Title"]</h1>
+    <p>Insert values and click calculate to predict price for option</p>
+
+    <div class="row">
+        <div class="label">S0 (Stock option price) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.S0)
+        </div>
     </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.K)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.K)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.sigma)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.sigma)
+    <div class="row">
+        <div class="label">K (Strike price) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.K)
+        </div>
     </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.r)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.r)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.T)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.T)
+    <div class="row">
+        <div class="label">sigma (Velocity %) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.sigma)
+        </div>
     </div>
 
-    <button asp-action="CalcBlackSholes">Calculate</button>
+    <div class="row">
+        <div class="label">r (Interest rate %) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.r)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="label">T (Time to exp [yr]) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.T)
+        </div>
+    </div>
+
+    <button style="margin-top: 20px" asp-action="CalcBlackSholes">Calculate</button>
+
+    <div class="output">
+        @TempData["Value"]
+    </div>
 </form>
-
-
-
-<div>
-    @TempData["Value"]
-</div>

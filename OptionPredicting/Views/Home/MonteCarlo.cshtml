@@ -2,65 +2,75 @@
 @{
     ViewData["Title"] = "Monte Carlo Predictin Option Price";
 }
-<h1>@ViewData["Title"]</h1>
 
+<style>
+    input{
+        margin: 5px
+    }
+    label{
+        margin-top: 10px
+    }
+    output{
+        margin-top: 20px
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
 <p>Insert values and click calculate to predict price for option</p>
 
 <form>
-    <div class="editor-label">
-        @Html.LabelFor(model => model.S0)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.S0)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.K)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.K)
+    <div class="row">
+        <div class="label">S0 (Stock option price) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.S0)
+        </div>
     </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.sigma)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.sigma)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.r)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.r)
+    <div class="row">
+        <div class="label">K (Strike price) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.K)
+        </div>
     </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.T)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.T)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.timestamp)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.timestamp)
+    <div class="row">
+        <div class="label">sigma (Velocity %) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.sigma)
+        </div>
     </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.samples)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.samples)
+    <div class="row">
+        <div class="label">r (Interest rate %) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.r)
+        </div>
     </div>
 
-    <button asp-action="CalcMonteCarlo">Calculate</button>
+    <div class="row">
+        <div class="label">T (Time to exp [yr]) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.T)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="label">Samples (Number of samples) =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.samples)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="label">Timestamp =</div>
+        <div class="input">
+            @Html.EditorFor(model => model.timestamp)
+        </div>
+    </div>
+
+    <button style="margin-top: 20px" asp-action="CalcMonteCarlo">Calculate</button>
+
+    <div class="output">
+        @TempData["Value"]
+    </div>
 </form>
-
-
-
-<div>
-    @TempData["Value"]
-</div>
